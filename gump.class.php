@@ -1238,7 +1238,7 @@ class GUMP
             return;
         }
 
-        if (!preg_match('/^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖßÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿа-я])+$/i', $input[$field]) !== false) {
+        if (!preg_match('/^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖßÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿа-яА-Я])+$/i', $input[$field]) !== false) {
             return array(
                 'field' => $field,
                 'value' => $input[$field],
@@ -1265,7 +1265,7 @@ class GUMP
             return;
         }
 
-        if (!preg_match('/^([a-z0-9ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖßÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿа-я])+$/i', $input[$field]) !== false) {
+        if (!preg_match('/^([a-z0-9ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖßÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿа-яА-Я])+$/i', $input[$field]) !== false) {
             return array(
                 'field' => $field,
                 'value' => $input[$field],
@@ -1292,7 +1292,7 @@ class GUMP
             return;
         }
 
-        if (!preg_match('/^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖßÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ_-а-я])+$/i', $input[$field]) !== false) {
+        if (!preg_match('/^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖßÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ_-а-яА-Я])+$/i', $input[$field]) !== false) {
             return array(
                 'field' => $field,
                 'value' => $input[$field],
@@ -1319,7 +1319,7 @@ class GUMP
             return;
         }
 
-        if (!preg_match("/^([a-z0-9ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖßÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿа-я\s])+$/i", $input[$field]) !== false) {
+        if (!preg_match("/^([a-z0-9ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖßÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿа-яА-Я\s])+$/i", $input[$field]) !== false) {
             return array(
                 'field' => $field,
                 'value' => $input[$field],
@@ -1346,7 +1346,7 @@ class GUMP
             return;
         }
 
-        if (!preg_match("/^([0-9a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖßÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿа-я\s])+$/i", $input[$field]) !== false) {
+        if (!preg_match("/^([0-9a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖßÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿа-яА-Я\s])+$/i", $input[$field]) !== false) {
             return array(
                 'field' => $field,
                 'value' => $input[$field],
