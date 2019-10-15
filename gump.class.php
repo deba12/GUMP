@@ -2187,7 +2187,16 @@ class GUMP
             return;
         }
 
-        if (!is_string($input[$field]) || !is_object(json_decode($input[$field]))) {
+        $valid_json = static function ($string): bool {
+
+			$test = json_decode($string);
+
+			if(json_last_error() === 0) return true;
+			else return false;
+
+        };
+
+        if (!is_string($input[$field]) || !$valid_json($input[$field])) {
             return array(
               'field' => $field,
               'value' => $input[$field],
