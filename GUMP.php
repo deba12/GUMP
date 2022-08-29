@@ -8,8 +8,7 @@
  *
  * @version     1.5
  */
-class GUMP
-{
+class GUMP {
     // Singleton instance of GUMP
     protected static $instance = null;
 
@@ -125,6 +124,8 @@ class GUMP
      * Magic method to generate the validation error messages.
      *
      * @return string
+     * @throws Exception
+     * @throws Exception
      */
     public function __toString()
     {
@@ -317,7 +318,6 @@ class GUMP
      */
     public function sanitize(array $input, array $fields = array(), $utf8_encode = true)
     {
-        $magic_quotes = (bool) get_magic_quotes_gpc();
 
         if (empty($fields)) {
             $fields = array_keys($input);
@@ -334,9 +334,6 @@ class GUMP
                     $value = $this->sanitize($value);
                 }
                 if (is_string($value)) {
-                    if ($magic_quotes === true) {
-                        $value = stripslashes($value);
-                    }
 
                     if (strpos($value, "\r") !== false) {
                         $value = trim($value);
@@ -345,7 +342,7 @@ class GUMP
                     if (function_exists('iconv') && function_exists('mb_detect_encoding') && $utf8_encode) {
                         $current_encoding = mb_detect_encoding($value);
 
-                        if ($current_encoding != 'UTF-8' && $current_encoding != 'UTF-16') {
+                        if ($current_encoding !== 'UTF-8' && $current_encoding != 'UTF-16') {
                             $value = iconv($current_encoding, 'UTF-8', $value);
                         }
                     }
@@ -1238,7 +1235,9 @@ class GUMP
             return;
         }
 
-        if (!preg_match('/^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖßÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿа-яА-Я])+$/i', $input[$field]) !== false) {
+        /** @noinspection NotOptimalRegularExpressionsInspection */
+        /** @noinspection PhpRangesInClassCanBeMergedInspection */
+        if (!preg_match('/^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖßÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿа-яА-Я])+$/ui', $input[$field]) !== false) {
             return array(
                 'field' => $field,
                 'value' => $input[$field],
@@ -1265,7 +1264,9 @@ class GUMP
             return;
         }
 
-        if (!preg_match('/^([a-z0-9ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖßÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿа-яА-Я])+$/i', $input[$field]) !== false) {
+        /** @noinspection NotOptimalRegularExpressionsInspection */
+        /** @noinspection PhpRangesInClassCanBeMergedInspection */
+        if (!preg_match('/^([a-z0-9ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖßÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿа-яА-Я])+$/ui', $input[$field]) !== false) {
             return array(
                 'field' => $field,
                 'value' => $input[$field],
@@ -1292,6 +1293,8 @@ class GUMP
             return;
         }
 
+        /** @noinspection NotOptimalRegularExpressionsInspection */
+        /** @noinspection PhpCoveredCharacterInClassInspection */
         if (!preg_match('/^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖßÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ_-а-яА-Я])+$/i', $input[$field]) !== false) {
             return array(
                 'field' => $field,
@@ -1423,7 +1426,7 @@ class GUMP
      */
     protected function validate_boolean($field, $input, $param = null)
     {
-        if (!isset($input[$field]) || empty($input[$field]) && $input[$field] !== 0) {
+        if (!isset($input[$field]) || (empty($input[$field]) && $input[$field] !== 0)) {
             return;
         }
 
@@ -1484,6 +1487,7 @@ class GUMP
             return;
         }
 
+        /** @noinspection BypassedUrlValidationInspection */
         if (!filter_var($input[$field], FILTER_VALIDATE_URL)) {
             return array(
                 'field' => $field,
@@ -1714,7 +1718,7 @@ class GUMP
             return;
         }
 
-        if (!preg_match("/^([a-z \p{L} '-])+$/i", $input[$field]) !== false) {
+        if (!preg_match("/^([a-z \p{L} '-])+$/ui", $input[$field]) !== false) {
             return array(
                 'field' => $field,
                 'value' => $input[$field],
